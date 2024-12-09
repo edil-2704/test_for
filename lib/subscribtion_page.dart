@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gradient_borders/gradient_borders.dart';
@@ -16,98 +18,136 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
-        alignment: Alignment.center,
         children: [
+          // Background Circles
           Positioned(
-            top: 71.h,
-            left: 16.w,
-            child: const BackButton(),
+            top: 80,
+            left: -199,
+            child: Container(
+              width: 317.w,
+              height: 359.h,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xff6B66D8),
+                    spreadRadius: 10.r,
+                    blurRadius: 100.r,
+                  ),
+                ],
+              ),
+            ),
           ),
-          const SizedBox(height: 16),
+          Positioned(
+            top: 370,
+            left: 221,
+            child: Container(
+              width: 317.w,
+              height: 359.h,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xff6B66D8),
+                    spreadRadius: 10.r,
+                    blurRadius: 100.r,
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            top: 71,
+            left: 16,
+            child: BackButton(
+              color: const Color(0xffFFFFFF).withOpacity(0.4),
+            ),
+          ),
+
           Positioned(
             top: 91.h,
             left: 91.w,
-            child: SizedBox(
-              height: 24.h,
-              width: 262.w,
-              child: const Text(
-                'Выберите подписку',
-                style: AppStyles.displayLarge,
-              ),
+            child: const Text(
+              'Выберите подписку',
+              style: AppStyles.displayLarge,
             ),
           ),
-          Positioned(
-            top: 179.h,
-            child: SubscriptionCard(
-              isSelected: false,
-              title: '1 месяц',
-              description: 'Описание',
-              price: '1000р',
-              onTap: () {
-                print('1 месяц выбран');
-              },
-              title2: 'Описание',
-            ),
-          ),
-          Stack(
-            children: [
-              Positioned(
-                top: 335.h,
-                left: 32.w,
-                child: SubscriptionCard(
-                  isSelected: true,
-                  title: '6 месяцев',
+
+          // Main Content
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 71.h),
+            child: Column(
+              children: [
+                SizedBox(height: 100.h),
+
+                // Subscription Cards
+                SubscriptionCard(
+                  isSelected: false,
+                  title: '1 месяц',
                   description: 'Описание',
-                  price: '10 000р',
-                  originalPrice: '12 000р',
-                  isRecommended: true,
-                  features: const [
-                    'что входит',
-                    'что входит',
-                    'что входит',
-                    'что входит',
-                    'что входит',
-                  ],
+                  price: '1000р',
                   onTap: () {
-                    print('6 месяцев выбран');
+                    log('1 месяц выбран');
                   },
                   title2: 'Описание',
                 ),
-              ),
-              Positioned(
-                top: 320.h,
-                left: 289.w,
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 35.h,
-                  width: 75.w,
-                  decoration: BoxDecoration(
-                    color: const Color(0xffFFFFFF),
-                    borderRadius: BorderRadius.circular(13.r),
-                  ),
-                  child: Text(
-                    'выгодно',
-                    style: AppStyles.purchaseText,
-                  ),
+                SizedBox(height: 24.h),
+                Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    SubscriptionCard(
+                      isSelected: true,
+                      title: '6 месяцев',
+                      description: 'Описание',
+                      price: '10 000р',
+                      originalPrice: '12 000р',
+                      isRecommended: true,
+                      features: const [
+                        'что входит',
+                        'что входит',
+                        'что входит',
+                        'что входит',
+                        'что входит',
+                      ],
+                      onTap: () {
+                        log('6 месяцев выбран');
+                      },
+                      title2: 'Описание',
+                    ),
+                    Positioned(
+                      top: -20,
+                      left: 330,
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 35,
+                        width: 75,
+                        decoration: BoxDecoration(
+                          color: const Color(0xffFFFFFF),
+                          borderRadius: BorderRadius.circular(13.r),
+                        ),
+                        child: const Text(
+                          'выгодно',
+                          style: AppStyles.purchaseText,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              Positioned(
-                top: 628.h,
-                left: 36.w,
-                child: GestureDetector(
+                SizedBox(height: 40.h),
+
+                // Purchase Button
+                GestureDetector(
                   onTap: () {
-                    print('Покупка выполнена');
+                    log('Покупка выполнена');
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
                     height: 60.h,
-                    width: 317.w,
+                    width: double.infinity,
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                        colors: [
-                          Color(0xFF6B66D8),
-                          Color(0xFFBABAD7),
-                        ],
+                        colors: [Color(0xFF6B66D8), Color(0xFFBABAD7)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(29.r),
                     ),
@@ -118,74 +158,40 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                     ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          Positioned(
-            top: 791.h,
-            left: 57.w,
-            child: Row(
-              children: [
-                const Text('terms of use', style: AppStyles.policyText),
-                SizedBox(width: 15.w),
-                const Text('policy privacy', style: AppStyles.policyText),
-                SizedBox(width: 15.w),
-                ElevatedButton(
-                  onPressed: () {
-                    print('Восстановить покупку');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff6B66D8).withOpacity(0.1),
-                  ),
-                  child: const Text(
-                    'Restore purchase',
-                    style: AppStyles.policyText,
-                  ),
+                const Spacer(),
+
+                // Footer
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'terms of use',
+                      style: AppStyles.policyText,
+                    ),
+                    SizedBox(width: 15.w),
+                    const Text(
+                      'policy privacy',
+                      style: AppStyles.policyText,
+                    ),
+                    SizedBox(width: 15.w),
+                    ElevatedButton(
+                      onPressed: () {
+                        log('Восстановить покупку');
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            const Color(0xff6B66D8).withOpacity(0.1),
+                      ),
+                      child: const Text(
+                        'Restore purchase',
+                        style: AppStyles.policyText,
+                      ),
+                    ),
+                  ],
                 ),
+                SizedBox(height: 24.h),
               ],
             ),
-          ),
-          Stack(
-            children: [
-              Positioned(
-                top: 80.h,
-                left: -199.w,
-                child: Container(
-                  width: 317,
-                  height: 359,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xff6B66D8),
-                        spreadRadius: 10.r,
-                        blurStyle: BlurStyle.normal,
-                        blurRadius: 100.r,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Positioned(
-                top: 370.h,
-                left: 221.w,
-                child: Container(
-                  width: 317.w,
-                  height: 359.h,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0xff6B66D8),
-                        spreadRadius: 10.r,
-                        blurStyle: BlurStyle.normal,
-                        blurRadius: 100.r,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
           ),
         ],
       ),
@@ -193,6 +199,7 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
   }
 }
 
+// Subscription Card Widget
 class SubscriptionCard extends StatelessWidget {
   final bool isSelected;
   final String title;
@@ -223,15 +230,15 @@ class SubscriptionCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(16.r),
-        width: 321.w,
+        width: double.infinity,
         decoration: BoxDecoration(
           color: const Color(0xffFFFFFF).withOpacity(0.1),
-          borderRadius: BorderRadius.circular(29),
+          borderRadius: BorderRadius.circular(29.r),
           border: isSelected
               ? GradientBoxBorder(
                   gradient: LinearGradient(
                     colors: [
-                      const Color(0xFFFFFFFF).withOpacity(0.1),
+                      const Color(0xFFFFFFFF).withOpacity(0),
                       const Color(0xFFFFFFFF),
                     ],
                     begin: Alignment.topLeft,
@@ -247,7 +254,7 @@ class SubscriptionCard extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () {
-                    print('Button pressed');
+                    log('Button pressed');
                   },
                   icon: ShaderMask(
                     shaderCallback: (Rect bounds) {
@@ -260,11 +267,17 @@ class SubscriptionCard extends StatelessWidget {
                         end: Alignment.bottomRight,
                       ).createShader(bounds);
                     },
-                    child: Icon(
-                      isSelected ? Icons.check_circle : Icons.radio_button_off,
-                      color: Colors
-                          .white, // This is necessary to show the gradient
-                      size: 32,
+                    child: Column(
+                      children: [
+                        Icon(
+                          isSelected
+                              ? Icons.check_circle
+                              : Icons.radio_button_off,
+                          color: Colors
+                              .white, // This is necessary to show the gradient
+                          size: 32.r,
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -286,7 +299,6 @@ class SubscriptionCard extends StatelessWidget {
                   ),
                 ),
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
                       price,
@@ -301,35 +313,31 @@ class SubscriptionCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 30),
-            Row(
-              children: [
-                if (features != null)
+            const SizedBox(height: 30),
+            if (features != null)
+              Row(
+                children: [
+                  SizedBox(width: 20.w),
                   Column(
                     children: features!
                         .map(
                           (feature) => Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Icon(
-                                Icons.circle,
-                                size: 6,
-                                color: Colors.white,
-                              ),
-                              const SizedBox(width: 8),
+                              const Icon(Icons.circle,
+                                  size: 6, color: Colors.white),
+                              SizedBox(width: 16.w),
                               Text(
                                 feature,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                ),
+                                style: AppStyles.cardTextEnter,
                               ),
                             ],
                           ),
                         )
                         .toList(),
                   ),
-              ],
-            ),
+                ],
+              ),
           ],
         ),
       ),
