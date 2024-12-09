@@ -50,11 +50,10 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
             ),
           ),
           Stack(
-            clipBehavior: Clip.none,
             children: [
               Positioned(
                 top: 335.h,
-                left: 55.w,
+                left: 32.w,
                 child: SubscriptionCard(
                   isSelected: true,
                   title: '6 месяцев',
@@ -79,14 +78,16 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
                 top: 320.h,
                 left: 289.w,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8.h, vertical: 4.w),
+                  alignment: Alignment.center,
+                  height: 35.h,
+                  width: 75.w,
                   decoration: BoxDecoration(
                     color: const Color(0xffFFFFFF),
                     borderRadius: BorderRadius.circular(13.r),
                   ),
                   child: Text(
                     'выгодно',
-                    style: TextStyle(fontSize: 12.h),
+                    style: AppStyles.purchaseText,
                   ),
                 ),
               ),
@@ -120,7 +121,6 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
               ),
             ],
           ),
-
           Positioned(
             top: 791.h,
             left: 57.w,
@@ -145,7 +145,6 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
               ],
             ),
           ),
-
           Stack(
             children: [
               Positioned(
@@ -188,7 +187,6 @@ class _SubscriptionPageState extends State<SubscriptionPage> {
               ),
             ],
           ),
-          // Content
         ],
       ),
     );
@@ -225,8 +223,7 @@ class SubscriptionCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.all(16.r),
-        height: 131,
-        width: 321,
+        width: 321.w,
         decoration: BoxDecoration(
           color: const Color(0xffFFFFFF).withOpacity(0.1),
           borderRadius: BorderRadius.circular(29),
@@ -302,6 +299,35 @@ class SubscriptionCard extends StatelessWidget {
                       ),
                   ],
                 ),
+              ],
+            ),
+            SizedBox(height: 30),
+            Row(
+              children: [
+                if (features != null)
+                  Column(
+                    children: features!
+                        .map(
+                          (feature) => Row(
+                            children: [
+                              const Icon(
+                                Icons.circle,
+                                size: 6,
+                                color: Colors.white,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                feature,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                        .toList(),
+                  ),
               ],
             ),
           ],

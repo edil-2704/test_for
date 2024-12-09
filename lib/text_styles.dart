@@ -28,4 +28,10 @@ abstract class AppStyles {
     fontSize: 12,
     fontWeight: FontWeight.w500,
   );
+  static const purchaseText = TextStyle(
+    color: Color(0xff6B66D8),
+    fontFamily: 'Montserrat_Alternates',
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+  );
 }
